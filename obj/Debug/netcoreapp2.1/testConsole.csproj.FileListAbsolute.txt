@@ -1,0 +1,11 @@
+/Users/chen/MyWork/Dotnet/testConsole/bin/Debug/netcoreapp2.1/testConsole.deps.json
+/Users/chen/MyWork/Dotnet/testConsole/bin/Debug/netcoreapp2.1/testConsole.runtimeconfig.json
+/Users/chen/MyWork/Dotnet/testConsole/bin/Debug/netcoreapp2.1/testConsole.runtimeconfig.dev.json
+/Users/chen/MyWork/Dotnet/testConsole/bin/Debug/netcoreapp2.1/testConsole.dll
+/Users/chen/MyWork/Dotnet/testConsole/bin/Debug/netcoreapp2.1/testConsole.pdb
+/Users/chen/MyWork/Dotnet/testConsole/obj/Debug/netcoreapp2.1/testConsole.csprojAssemblyReference.cache
+/Users/chen/MyWork/Dotnet/testConsole/obj/Debug/netcoreapp2.1/testConsole.csproj.CoreCompileInputs.cache
+/Users/chen/MyWork/Dotnet/testConsole/obj/Debug/netcoreapp2.1/testConsole.AssemblyInfoInputs.cache
+/Users/chen/MyWork/Dotnet/testConsole/obj/Debug/netcoreapp2.1/testConsole.AssemblyInfo.cs
+/Users/chen/MyWork/Dotnet/testConsole/obj/Debug/netcoreapp2.1/testConsole.dll
+/Users/chen/MyWork/Dotnet/testConsole/obj/Debug/netcoreapp2.1/testConsole.pdb
