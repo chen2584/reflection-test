@@ -52,7 +52,7 @@ class Program
             Console.Write(num);
         }
 
-        Console.WriteLine("--- Test Sequence Equal ---");
+        Console.WriteLine("\n--- Test Sequence Equal ---");
         SequenceEqualEx1();
 
     }
@@ -68,15 +68,71 @@ class Program
         Pet pet2 = new Pet { Name = "Peanut", Age = 8 };
 
         // Create two lists of pets.
-        List<Pet> pets1 = new List<Pet> { pet1, pet2 };
-        List<Pet> pets2 = new List<Pet> { pet2, pet1 };
+        List<Pet> pets1 = new List<Pet> { pet2, pet1 };
+        List<Pet> pets2 = new List<Pet> { pet2, pet1, pet2 };
         //pets2 = pets2.OrderBy(x => x.Age).ToList();
 
+        var values = pets2.Distinct();
         bool equal = pets1.SequenceEqual(pets2);
+        //var equal = pets2.Except(pets1).Any();
+        foreach (var result in values)
+        {
+            Console.WriteLine($"{result.Name} {result.Age}");
+        }
 
         Console.WriteLine(
             "The lists {0} equal.",
             equal ? "are" : "are not");
+
+        Console.WriteLine("\n--- Test IEquatable ---");
+
+        List<Position> numList1 = new List<Position>() { new Position { Id = 555, Name = "Chen" } };
+        List<Position> numList2 = new List<Position>() { new Position { Id = 555, Name = "Chen" } };
+        Console.WriteLine(numList1[0].Id == numList2[0].Id);
+        Console.WriteLine(numList1[0].Equals((object)numList2[0]));
+        Console.WriteLine($"Hash numList1[0]: {numList1[0].GetHashCode()}, numList2[0]: {numList2[0].GetHashCode()}");
+        Console.WriteLine("Equal Object: " + Object.Equals(numList1[0], numList2[0]));
+        Console.WriteLine($"Hash numList1[0].Id = {numList1[0].Id.GetHashCode()} numList2[0].Id = {numList2[0].Id.GetHashCode()}");
+
+        int num1 = 555;
+        int num2 = 555;
+        string name = "Chen";
+        Console.WriteLine($"{num1.GetHashCode()} : {num2.GetHashCode()} {name.GetHashCode()}");
+
+        Console.WriteLine("Position Equal: " + numList1[0].Equals(numList2[0]));
+        Console.WriteLine("Object Equal: " + Object.Equals(numList1[0], numList2[0]));
+        Console.WriteLine("Object Index: " + numList1.IndexOf(new Position { Id = 555, Name = "Chen" }));
+        Console.WriteLine("Object Contain: " + numList1.Contains(new Position { Id = 555, Name = "Chen" }));
+
+        numList1.Remove(new Position { Id = 555, Name = "Chen" });
+        Console.WriteLine("Remove numList1. Remain: " + numList1.Count);
+
+    }
+}
+
+class Position : IEquatable<Position> // Will force use equals position
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public bool Equals(Position otherPosition)
+    {
+        //Console.WriteLine("Custom Equals");
+        return Name.Equals(otherPosition.Name);
+    }
+
+    public override bool Equals(object obj)
+    {
+        Console.WriteLine("Override Equals");
+        var position = obj as Position;
+        if (position == null)
+            return false;
+        return Equals(position);
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
     }
 }
 
