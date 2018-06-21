@@ -86,7 +86,7 @@ class Program
 
         Console.WriteLine("\n--- Test IEquatable ---");
 
-        List<Position> numList1 = new List<Position>() { new Position { Id = 555, Name = "Chen" } };
+        List<Position> numList1 = new List<Position>() { new Position { Id = 555, Name = "Chenz" }, new Position { Id = 555, Name = "Chen" } };
         List<Position> numList2 = new List<Position>() { new Position { Id = 555, Name = "Chen" } };
         Console.WriteLine(numList1[0].Id == numList2[0].Id);
         Console.WriteLine(numList1[0].Equals((object)numList2[0]));
@@ -130,7 +130,7 @@ class Position : IEquatable<PositionStruct>, IEquatable<Position> // Will force 
 
     public bool Equals(Position otherPosition)
     {
-        //Console.WriteLine("Custom Equals");
+        Console.WriteLine("Custom Equals");
         return Name.Equals(otherPosition.Name);
     }
 
