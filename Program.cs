@@ -104,13 +104,26 @@ class Program
         Console.WriteLine("Object Index: " + numList1.IndexOf(new Position { Id = 555, Name = "Chen" }));
         Console.WriteLine("Object Contain: " + numList1.Contains(new Position { Id = 555, Name = "Chen" }));
 
-        numList1.Remove(new Position { Id = 555, Name = "Chen" });
+        //numList1.Remove(new Position { Id = 555, Name = "Chen" });
         Console.WriteLine("Remove numList1. Remain: " + numList1.Count);
+        int num = 555;
+        Console.WriteLine("Test ValueType: " + numList1[0].Equals(num));
+
+        /*Console.WriteLine("--- Test Struct ---");
+        List<PositionStruct> numList1Strcut = new List<PositionStruct>() { new PositionStruct { Id = 555, Name = "Chen" } };
+        List<PositionStruct> numList2Struct = new List<PositionStruct>() { new PositionStruct { Id = 555, Name = "Chen" } };
+        Console.WriteLine("Position Equal: " + numList1Strcut[0].Equals(numList2Struct[0]));
+        Console.WriteLine("Object Equal: " + Object.Equals(numList1Strcut[0], numList2Struct[0]));
+        Console.WriteLine("Object Index: " + numList1Strcut.IndexOf(new PositionStruct { Id = 555, Name = "Chen" }));
+        Console.WriteLine("Object Contain: " + numList1Strcut.Contains(new PositionStruct { Id = 555, Name = "Chen" }));
+
+        numList1Strcut.Remove(new PositionStruct { Id = 555, Name = "Chen" });
+        Console.WriteLine("Remove numList1. Remain: " + numList1Strcut.Count);*/
 
     }
 }
 
-class Position : IEquatable<Position> // Will force use equals position
+class Position : IEquatable<PositionStruct>, IEquatable<Position> // Will force use equals position
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -123,10 +136,39 @@ class Position : IEquatable<Position> // Will force use equals position
 
     public override bool Equals(object obj)
     {
-        Console.WriteLine("Override Equals");
+        Console.WriteLine("Override Equals: " + obj.GetType().IsValueType);
         var position = obj as Position;
         if (position == null)
             return false;
+        return Equals(position);
+    }
+
+    public bool Equals(PositionStruct other)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+}
+
+struct PositionStruct : IEquatable<PositionStruct>
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public bool Equals(PositionStruct otherPosition)
+    {
+        //Console.WriteLine("Custom Equals");
+        return Name.Equals(otherPosition.Name);
+    }
+
+    public override bool Equals(object obj)
+    {
+        Console.WriteLine("Override Equals: " + obj.GetType().IsValueType);
+        var position = (PositionStruct)obj;
         return Equals(position);
     }
 
